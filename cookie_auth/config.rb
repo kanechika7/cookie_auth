@@ -42,16 +42,16 @@ module CookieAuth
     module InstanceMethods
 
       # instance methods
-      def setting_cookies(cookies)
-        cookies["user_info"] = user_info
-        cookies["authenticate_key_value"] = authenticate_key_value
+      def setting_session(session)
+        session["user_info"] = user_info
+        #session["authenticate_key_value"] = authenticate_key_value
       end
 
-      def authenticate_key_value
-        h = {}
-        COOKIE_AUTH_CREDENTIALS[self.class.service_name][:authenticate_keys].each{|k| h[k] = send(k) }
-        return cookie_encrypt JSON.dump(h), COOKIE_AUTH_CREDENTIALS[self.class.service_name][:authenticate_common_pass]
-      end
+      #def authenticate_key_value
+      #  h = {}
+      #  COOKIE_AUTH_CREDENTIALS[self.class.service_name][:authenticate_keys].each{|k| h[k] = send(k) }
+      #  return cookie_encrypt JSON.dump(h), COOKIE_AUTH_CREDENTIALS[self.class.service_name][:authenticate_common_pass]
+      #end
       def user_info
         h = {}
         COOKIE_AUTH_CREDENTIALS[self.class.service_name][:user_info_fields].each{|f| h[f] = send(f) }
